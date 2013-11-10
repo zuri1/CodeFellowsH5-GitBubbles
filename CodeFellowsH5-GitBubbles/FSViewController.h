@@ -10,4 +10,11 @@
 
 @interface FSViewController : UIViewController
 
+@property(nonatomic,strong) NSArray *bubbleViews;
+@property (nonatomic, strong) UIView *bubbleView;
+@property (nonatomic, strong) UIView *bubbleView2;
+@property (nonatomic, strong) UIView *bubbleView3;
+@property (nonatomic, strong) UIView *bubbleView4;
+@property (nonatomic, strong) UIView *bubbleView5;
+
 @end
