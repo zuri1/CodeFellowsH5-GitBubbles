@@ -51,8 +51,28 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)sender
 {
-    // code here
-    
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        UIView *tappedView;
+        for (UIView *bubbleView in _bubbleViews)
+        {
+            CGPoint touchPoint = [sender locationInView:self.view];
+            if (CGRectContainsPoint(bubbleView.frame, touchPoint))
+            {
+                tappedView = bubbleView;
+            }
+            CABasicAnimation *boundsAnim = [CABasicAnimation animationWithKeyPath:@"bounds"];
+            boundsAnim.fromValue = [NSValue valueWithCGRect:tappedView.layer.bounds];
+            boundsAnim.toValue = [NSValue valueWithCGRect:CGRectMake(20, 20, 100, 100)];
+            boundsAnim.duration = 0.2;
+            [tappedView.layer addAnimation:boundsAnim forKey:@"bounds"];
+            
+            // Change the actual data value in the layer to the final value.
+            tappedView.layer.bounds = CGRectMake(20, 20, 0, 0);
+            NSLog(@"Pop!");
+            self.view.backgroundColor = [UIColor redColor];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
